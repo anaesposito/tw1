@@ -1,0 +1,39 @@
+npm init -y
+ npm install tailwindcss postcss autoprefixer postcss-cli cssnano onchange
+ npx tailwindcss init -p
+
+en postcss.config.js
+const cssnano * require('cssnano');
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    cssnano:({
+      preset: 'default',
+    }),
+    autoprefixer: {},
+  },
+};
+
+
+
+en package.json
+  "scripts": {
+    "tw:build": "tailwindcss build ./src/css/tailwind.css -o ./public/css/tailwind.css",
+    "tw:prod": "cross-env NODE_ENV=production postcss build ./src/css/tailwind.css -o ./public/css/tailwind.css",
+    "tw:watch": "onchange \"tailwind.config.js\" \"src/**/*.css\" -- npm run tw:build"
+  },
+
+
+en css de src
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+en index.html
+ <link rel="stylesheet" href="css/tailwind.css">
+
+
+crear carpeta src/css/tailwind.css
+crear carpeta public/css/tailwind.css
